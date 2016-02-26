@@ -1,0 +1,127 @@
+[% DEFAULT
+   title="Pre-Release Checklist - 0.82 - zenog"
+   description=""
+%]
+[% WRAPPER lib/xhtml_doc
+
+%]
+
+[% WRAPPER chrome/styled_panel %]
+
+
+<pre>
+What to report
+ * for each single item
+  * OK or
+   * crashes
+   * inconsistent behaviour
+   * actions that do not work as expected
+ * for each section
+  * How much time did it take you to perform the tests?
+
+----
+System information
+ * OS: Ubuntu GNU/Linux 10.04
+ * Perl: 5.10.1
+ * Wx: 0.98
+ * wxWidgets: 2.8.10
+ * Wx::Perl::ProcessStream: 0.29
+ * PPI: 1.213
+----
+
+Preparation
+ 1. OK fresh Padre installation
+ 2. OK check whether you are running the to-be-released Padre version by opening the "About" box
+
+Perl 5 scripts => '''ONE PROBLEM'''
+ 1. OK open a Perl script
+ 1. OK run it by hitting F5
+ 1. OK change to the other output variant (external window or internal pane)
+ 1. FAIL run it by hitting Shift-F5
+ 1. OK enable syntax checks
+ 1. OK introduce a syntax error and inspect resulting output
+ 1. OK click on the syntax error to jump to the position of the error
+ 1. OK enable autocomplete at "Tools"->"Preferences"->"Autocomplete"
+ 1. OK start typing a word which is already in the file (maybe "warn" from "warnings")
+ 1. OK hit Ctrl-Space, select a suggestion and confirm it
+ 1. OK enable bracket autocomplete at "Tools"->"Preferences"->"Behavior"
+ 1. OK type ( [ { " ' - each of them should get its closing part automatically
+
+Perl 5 modules
+ 1. open a large Perl module from the Padre source
+ 1. enable "View"->"Show Functions"
+ 1. double-click on a function name to jump to its location in the file
+    * the text cursor should be at the corresponding function in the file
+ 1. enable "View"->"Show Outline"
+ 1. double-click on a method name to jump to its location in the file
+    * the text cursor should be at the corresponding location in the file
+
+Perl projects
+ 1. enable the project browser: "View"->"Show Project Browser/Tree"
+ 1. browse the directories of the Padre project
+ 1. open a file from the project
+ 1. save it under another name
+ 1. delete the newly created file
+ 1. load file using "Search" -> "Open Resource ..."
+
+Text files
+ 1. "File" -> "New"
+ 1. save it as {{{file.txt}}}
+ 1. save it as {{{file}}}
+ 1. load a text file from disk
+ 1. use "Edit" -> "Go To ..." to jump to a given line
+ 1. use "Edit" -> "Go To ..." to jump to a given character position
+
+Saving perl file without extension forgets its mime-type (see #1107)
+ 1. "File" -> "New"
+ 1. type in 
+{{{
+#!/usr/bin/perl
+use strict;
+use warnings;
+}}}
+ 1. save it as {{{file}}}
+ 1. Check if the mime-type (3rd box on the status bar) says "Perl 5"
+ 1. Close the file
+ 1. Open The file using "File" -> "Open"
+ 1. Check if the mime-type (3rd box on the status bar) says "Perl 5"
+ 1. Open The file using "File" -> "Save As"
+ 1. save it as {{{file2}}}
+ 1. Check if the mime-type (3rd box on the status bar) says "Perl 5"
+
+
+Perl distributions and templates and running
+ 1. create a new Perl 5 distribution: "File" -> "New" -> "Perl Distribution ..."
+ 1. create an additional "hello, world" style Perl 5 module in the same namespace: "File" -> "New" -> "Perl 5 Module"
+ 1. use "File" -> "Save Intuition" to save the module
+ 1. create a test for the module: "File" -> "New" -> "Perl 5 Test"
+ 1. run the test: "Run" -> "Run Tests"
+ 1. run the test: "Run" -> "Run and Build Tests"
+ 1. create a new Perl 5 script that uses the module: "File" -> "New" -> "Perl 5 Script"
+ 1. run it: "Run" -> "Run Script"
+ 1. run it: "Run" -> "Run Script (Debug Info)"
+ 1. add an infinite loop the the script
+ 1. run the script and abort it using F6
+
+Sessions
+ 1. cycle through the files using the keyboard: Ctrl-PageUp and Ctrl-PageDown
+ 1. save the session
+ 1. close one tab
+ 1. go to "File" -> "Recent Files" and re-open the file
+ 1. close all tabs
+ 1. load the session that you saved before
+
+Padre server
+ 1. start Padre
+ 1. "Tools" -> "Preferences": enable "Open Files in existing Padre"
+ 1. restart Padre
+ 1. type {{{padre SOME_FILE}}} in the command line (should open in the same instance of Padre)
+ 1. "Tools" -> "Preferences": disable "Open Files in existing Padre"
+ 1. restart Padre
+ 1. type {{{padre SOME_FILE}}} in the command line (should start a new instance of Padre)
+</pre>
+
+[% END %]
+[% END %]
+
+
