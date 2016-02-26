@@ -1,0 +1,97 @@
+[% DEFAULT
+   title="Programming Languages"
+   description=""
+%]
+[% WRAPPER lib/xhtml_doc
+
+%]
+
+[% WRAPPER chrome/styled_panel %]
+
+
+On this page we try to design how Padre should handle various needs of programming languages
+and file types.
+
+Every type can have several tools for syntax highlighting, for execution, help, etc
+
+<h2>Types</h2>
+
+<h3>Syntax highlighting can be by</h3>
+ * Scintilla (STC)
+ * Kate plugin (which is just a few regular expressions in Perl 5)
+ * Parrot parse tree
+ * Other
+
+<h3>Execution</h3>
+ * Various implementations
+
+
+<h2>Perl 5</h2>
+
+<h3>Syntax highlighting</h3>
+
+ * STC - old but fast
+ * PPI - slow but quite good, can provide parse tree
+ * Kate - (some Perl 5 regexes)
+ * Parrot - Not available
+
+<h3>Execution</h3>
+
+ * There can be several different versions of the perl compiler installed
+
+<h2>Perl 6</h2>
+
+<h3>Syntax highlighting</h3>
+
+ * by STD.pm (in Padre::Plugin:Perl6) 
+ * simple vi-style regex (will be in Padre::Plugin::Perl6 or separately to reduce the need for prereqs?) (Kate integration)
+ * by Parrot (subclass if Padre::Plugin::Parrot?)
+ * * Embedded Parrot
+ * * externally executed Parrot
+ * * Installed / development version of Parrot
+
+<h3>Execution</h3>
+
+Can have various implementations:
+ * Parrot/Rakudo
+ * Pugs ?
+ * ??
+
+Can be installed/development etc.
+
+<h3>Embedding</h3>
+
+ * by Parrot + Rakudo + Parrot::Interpreter (Parrot built, languages/perl6 built, Parrot::Embed built)
+
+<h2>PIR/PASM</h2>
+
+<h3>Syntax highlighting</h3>
+
+ * by simple regex
+ * by Parrot
+
+<h3>Execution</h3>
+
+ * by Parrot
+
+<h3>Embedding</h3>
+
+ * by Parrot + Parrot::Interpreter
+
+<h2>Python</h2>
+
+It has several implementations
+
+ * Pynie
+
+
+<h2>PHP</h2>
+
+ * Several versions of the official PHP
+ * Pipp
+
+
+[% END %]
+[% END %]
+
+
