@@ -1,0 +1,111 @@
+[% DEFAULT
+   title="Padre::Plugin::YAML"
+   description=""
+%]
+[% WRAPPER lib/xhtml_doc
+
+%]
+
+[% WRAPPER chrome/styled_panel %]
+
+YAML plug-in that provides background syntax checking
+
+<ul>
+   <li>By using YAML::XS we get great feedback ( Binding to libyaml, "C" Fast YAML 1.1 )</li>
+   <li>win32 user's will need to use YAML due to issue with YAML::XS on win32</li>
+</ul>
+
+<h2>Usage</h2>
+
+<ul>
+   <li>install Padre::Plugin::YAML</li>
+   <li>enable in Tools -> Plug-in Manager</li>
+   <li>make sure you have checked Show-Syntax-Check in View menu, you should have a Syntax Panel visible in lower part of screen</li>
+</ul>
+
+<h2>Limitations</h2>
+
+directives are supported only for the %YAML 1.1 or none
+
+<pre>
+%YAML 1.1
+# --- document separator
+---
+plack_middlewares:
+  -
+    - Expires
+    - Deflater
+    - StackTrace
+    - Debug
+    - panels
+    -
+      - Parameters
+      - Dancer::Version
+      - Dancer::Settings
+      - Memory
+      - PerlConfig
+      - DBITrace 
+      - ModuleVersions
+...
+# comments like so
+---
+rootproperty: blah
+section:
+  one: two
+  three: four
+  Foo: Bar
+  empty: ~
+# ... indicate the end of a document
+...
+</pre>
+
+<h2>Another example</h2>
+
+<pre>
+%YAML 1.1
+---
+ - - item 1
+   - item 2
+ - key 1: value 1
+   key 2: value 2
+ - ? complex key
+   : complex value
+...
+</pre>
+
+<h2>Links</h2>
+
+Formal
+<ul>
+   <li><a href="http://www.yaml.org/">yaml.org</a></li>
+   <li><a href="http://yaml.org/spec/1.1/">YAML Ain’t Markup Language (YAML™) Version 1.1</a></li>
+   <li><a href="http://www.yaml.org/refcard.html">%YAML 1.1 # Reference card</a></li>
+</ul>
+
+
+<ul>
+   <li><a href="http://stuartgunter.org/yaml-and-the-importance-of-schema-validation/">YAML and the importance of Schema Validation</a></li>
+   <li><a href="http://www.digitalhobbit.com/2005/10/04/yaml-validation-using-kwalify/">YAML validation using Kwalify</a></li>
+   <li><a href="http://www.kuwata-lab.com/kwalify/">kwalify (Ruby)</a>
+</ul>
+
+<a href="http://instantyaml.appspot.com/">on line validation</a> the only one so far, I have found that works :)
+
+<h2>Debugging</h2>
+
+Use the following to track down "Unknown YAML error" displayed in Syntax Panel.
+
+<pre>
+perl dev -a -t Padre::Plugin::YAML::Syntax
+</pre>
+
+<h2>To-Do</h2>
+
+* release version 0.04 after Padre 0.96, due to dependencies issues
+* tidy up code
+* syntax panel dose not show a green square when clean
+
+[% END %]
+[% END %]
+
+
