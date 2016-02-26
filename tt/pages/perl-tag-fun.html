@@ -1,0 +1,85 @@
+[% DEFAULT
+   title="Perl Tag Fun"
+   description=""
+%]
+[% WRAPPER lib/xhtml_doc
+
+%]
+
+[% WRAPPER chrome/styled_panel %]
+
+
+<h2>About this PerlTagFun page</h2>
+
+This page is a bunch of notes written while trying to play with Padre (v0.56, but it should work with earlier versions too) code completion and perltags.
+
+As I've never used ctags or any tools of this kind, this should be seen as a "newbie compliant page".
+
+<h2>Introduction</h2>
+
+As Padre shows code suggestions for variable method name in an existing file, I was wondering if it could be possible for Padre to show such suggestions about installed moduled when writing a "use xxx" line or even when using ThaModule::Rules::????.
+
+<h2>Perltags</h2>
+
+I had already heard about ctags (probably while browsing the list of available packages during *nix installs), but I know nearly nothing about it. It's a tool that scans a source file, or every source files found in a directory tree. For every found file, ctags does a static analyze of the file to extracts method name (and maybe more than this). The found files and methods names are then stored in a file, and this file can be used by an editor to navigate in your source. (more info on [ctags->http://ctags.sourceforge.net/])
+
+As for every existing good tool, there's an equivalent for perl. It's called [Perl::Tags->http://search.cpan.org/~osfameron/Perl-Tags/] and it's hosted on CPAN. 
+
+<h2>Installing</h2>
+
+To begin with, let's check if this module exists in my perl distribition (a strawberry perl 5.10.1 on a windows 7 machine). 
+
+It's not installed by default, a simple "cpan> install Perl::Tags" is enough to get installed without any trouble.
+
+If perl is on your path, you now should be able to use the command line version:
+
+<pre>
+C:\strawberry>perl-tags
+Usage:
+      perl-tags version 0.01. Copyright 2009, Steffen Mueller
+
+      Usage: perl-tags <options> <input files or dirs...>
+</pre>
+
+This will surely please Padre that was previously throwing "perl-tags not found" errors, when I used "Perl->Create Project tagsfile" menu.
+
+<h2>Generating tag file</h2>
+
+Let's try it "C:\strawberry>perl-tags -o strawberry20100211.tags ."
+
+No error message, it's seems to be indexing my whole strawberry directory (containing, perl/lib, perl/site/lib, perl/vendor/lib) with default settings (that is to say, nearly infinite recursion and variable indexation)... I hope I'm not 't too ambitious...
+
+More than 3/4 of an hour later, perl-tags died without warn:
+
+<pre>
+C:\strawberry>perl-tags -o strawberry20100211.tags .
+Died at C:/strawberry/perl/site/lib/Perl/Tags.pm line 687.
+</pre>
+
+<p>
+Trying with a smaller set (only modules in perl/vendor) proved to be more successful, yet not speedier:
+
+<p>
+C:\strawberry>perl-tags -o strawberry20100211-vendor.tags perl\vendor
+
+<p>
+The surprising thing is that the resulting file is 21MB large, while full directory is only 17.5MB large. Trying to remove variable helps to reduce the file to 10MB, but it's still large!
+<p>
+
+Having this tag file generated, you have to go in padre preferences (Edit->Preferences->External Tools) and put the full file pathname in "perl ctags file" option (in my case c:/strawberry/strawberry20100211-vendor.tags).
+
+<h2>Enjoy</h2>
+
+Now it's done, you can type Win32 and press ctrl+<space> to see a list of modules available (it takes around 3 seconds to appear). You can also choose an imported method name, let's say Data::Dumper or Test::More::require_ok, right click on it and choose "Find method declaration" to open the perl source code directly on the method. 
+
+<h2>To be continued</h2>
+
+There's still some questions to answer:
+ * is it possible to mix system and project .tags file?
+ * I can't auto complete method name, is this an non existing function?
+ * ...
+
+[% END %]
+[% END %]
+
+
