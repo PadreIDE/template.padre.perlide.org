@@ -1,0 +1,103 @@
+[% DEFAULT
+   title="Padre::Plugin::SpellCheck"
+   description=""
+%]
+[% WRAPPER lib/xhtml_doc
+
+%]
+
+[% WRAPPER chrome/styled_panel %]
+
+
+To Enable {{{Padre::Plugin::SpellCheck}}} in Padre, go to Tools->Plug-in Manager, select Spell Checker in left area, then click preferences to open dialog and save your chosen dictionary and language.
+<b>Tip plug-in has to be disabled to set preferences, see top right hand corner of plug-in Manager for status.</b>
+
+Please note version compatibility, it's important, you can check what version is installed for {{{SpellCheck}}} use Plug-in Manager for Padre look in Help -> About -> Information
+
+<pre>
+Padre::Plugin::SpellCheck v1.31_03 - Padre 0.97+
+Padre::Plugin::SpellCheck v1.29 Padre 0.96
+</pre>
+
+
+<h2>Padre Plug-in Manager</h2>
+
+<img src="/images/PadrePluginSpellCheck/pp_sc_01.png">
+
+
+<h2>Usage F7</h2>
+
+* works against whole file or selected text.
+* you can click on a suggested word to replace.
+
+[[Image(ak001.png)]]
+
+<b>NB in Padre 0.97+ with pp-sc v1.31_01 you can edit preferences from context_menu</b>
+
+<h2>Engine's</h2>
+
+You need to install either or both of the following, plus a language file.
+
+<h2>Text::Aspell</h2>
+
+Outline
+
+<pre>
+$ sudo apt-get install aspell libaspell-dev aspell-en
+</pre>
+
+check aspell is installed
+
+<pre>
+$ aspell dump dicts
+</pre>
+
+install current version.
+
+<pre>
+$ cpanm -v http://cpan.metacpan.org/authors/id/H/HA/HANK/Text-Aspell-0.09.tar.gz
+</pre>
+
+<h2>Text::Hunspell</h2>
+
+Outline
+
+<pre>
+$ sudo apt-get install hunspell libhunspell-dev hunspell-en-GB
+</pre>
+
+check hunspell is installed
+
+<pre>
+$ hunspell -D
+</pre>
+
+install current version.
+
+<pre>
+$ cpanm -v http://cpan.metacpan.org/authors/id/C/CO/COSIMO/Text-Hunspell-2.03.tar.gz
+</pre>
+
+<h2>Limitations</h2>
+
+* Hunspell assumes static location 
+
+<pre>
+$speller = Text::Hunspell->new(
+    "/usr/share/hunspell/$iso.aff", # Hunspell affix file
+    "/usr/share/hunspell/$iso.dic"  # Hunspell dictionary file
+);
+</pre>
+
+
+<h2>ToDo</h2>
+
+* Release version 1.25 after Padre 0.96 is out
+* #383 {{{Padre::Plugin::SpellCheck}}} Add to dictionary
+* #384 {{{Padre::Plugin::SpellCheck}}} allow replacing a word by typing in a new word
+
+
+[% END %]
+[% END %]
+
+
