@@ -30,6 +30,7 @@ plan tests => 6;
 	my ($stdout, $stderr, @results) = capture { system "$^X build_site.pl --destdir $dir --sourcedir ."; };
 	like $stdout, qr/Creating new/;
 	chomp $stderr;
-	like $stderr, qr/WARNING/;
+	is $stderr, '';
+	#like $stderr, qr/WARNING/;
 }
 
