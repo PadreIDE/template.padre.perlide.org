@@ -29,6 +29,7 @@ jobs:
         run: |
             perl -v
             cpanm --notest Module::Install
+            cpanm --notest --installdeps .
             perl Makefile.PL
             make
             make manifest
