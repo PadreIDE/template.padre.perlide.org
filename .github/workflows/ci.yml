@@ -24,13 +24,22 @@ jobs:
 
     name: Build on Linux with Perl ${{ matrix.perl-version }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - name: Version of Perl
+        run: |
+            perl -v
+
+      - name: Install Module::Install
+        run: |
+            cpanm --notest Module::Install
+
+      - name: Install Dependencies
+        run: |
+            cpanm --notest --installdeps .
 
       - name: Regular tests
         run: |
-            perl -v
-            cpanm --notest Module::Install
-            cpanm --notest --installdeps .
             perl Makefile.PL
             make
             make manifest
@@ -38,3 +47,4 @@ jobs:
             perl build_site.pl --sourcedir . --destdir ~/padre.perlide.org
             ./Build
             ./Build test
+
